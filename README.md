@@ -23,11 +23,11 @@ int main() {
   bitset.toggle(0); // bit at index 0 = true
   bitset.toggle(0); // bit at index 0 = false
 
-  std::cout << bitset.size() << "\n"; // prints the size of bitset, output: 3
+  std::cout << bitset.size() << "\n"; // get the size, output: 3
   bitset.pop(1) // remove element at index 1
-  std::cout << bitset.size() << "\n"; // prints the size of bitset, output: 2
+  std::cout << bitset.size() << "\n"; // get the size, output: 2
 
-  std::cout << bitset.get_string() << "\n"; // outputs the string representation of the bitset, output: 01
+  std::cout << bitset.get_string() << "\n"; // get the string representation, output: 01
 
   bitset.destroy(); // deallocate memory, not calling this will cause memory leaks!
 
