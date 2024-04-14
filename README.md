@@ -1,6 +1,6 @@
 # C++ CUDA compatible, header-only dynamic bitset
 
-I didn't get any other dynamic bitset libraries to work with CUDA so I decided to make one quickly. I added some basic functions such as `set`, `unset`, `toggle`, `get_string`, `pop` and `push_back`.
+I didn't get any other dynamic bitset libraries to work with CUDA so I decided to make one quickly. Note that this library should work for non-CUDA applications as well. I added some basic functions such as `set`, `unset`, `toggle`, `get_string`, `pop` and `push_back`. I tried making this as memory efficient as possible, each byte in `bytes` contains 8 bits, the amount of bytes is calculated like this: `floor(n_bits / 8)`.
 
 ### USAGE:
 
