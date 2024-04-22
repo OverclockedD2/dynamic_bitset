@@ -2,7 +2,7 @@
 
 This is a header-only dynamic bitset developed in C++20, but probably works for other versions as well. This is also doesn't cause CUDA to freak out when included. This library has includes the most basic features a bitset needs: `push_i`, `pop_i`, `set_i`, `set`, `unset_i`, `unset`, `toggle_i`, `toggle`, `swap`, `reverse`, `set_string`, `get_string`, `get_bit`, `destroy`. More about all of those functions later. This library can defintetely be improved in terms of performance and memory useage, but the current version does a pretty good job, the amount of bytes that the data container takes up is calculated like this: `floor(n_bits / 8)`, plus `sizeof(bool)` and `sizeof(int)`. The deconstructor of the bitset class deallocates all dynamically allocated memory, but if you wish, you can deallocate the memory before exit using `destroy()`. This library also does basic error checking, but some stuff might bypass, so be careful and try to avoid giving it invalid data.
 
-> [!important]
+> [!caution]
 > MD5 CHECKSUM: 95f7fc2e21d53363db9df3a4cbff2733
 
 ### USAGE:
