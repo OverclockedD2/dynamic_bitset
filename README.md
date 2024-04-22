@@ -1,57 +1,87 @@
-# C++ CUDA compatible, header-only dynamic bitset
+# C++ dynamic bitset
 
-I didn't get any other dynamic bitset libraries to work with CUDA so I decided to make one quickly. Note that this library should work for non-CUDA applications as well. I added some basic functions such as `set`, `unset`, `toggle`, `get_string`, `pop` and `push_back`. I tried making this as memory efficient as possible, each byte in `bytes` contains 8 bits, the amount of bytes is calculated like this: `floor(n_bits / 8)`.
+This is a header-only dynamic bitset developed in C++20, but probably works for other versions as well. This is also doesn't cause CUDA to freak out when included. This library has includes the most basic features a bitset needs: `push_i`, `pop_i`, `set_i`, `set`, `unset_i`, `unset`, `toggle_i`, `toggle`, `swap`, `reverse`, `set_string`, `get_string`, `get_bit`, `destroy`. More about all of those functions later. This library can defintetely be improved in terms of performance and memory useage, but the current version does a pretty good job, the amount of bytes that the data container takes up is calculated like this: `floor(n_bits / 8)`, plus `sizeof(bool)` and `sizeof(int)`. The deconstructor of the bitset class deallocates all dynamically allocated memory, but if you wish, you can deallocate the memory before exit using `destroy()`. This library also does basic error checking, but some stuff might bypass, so be careful and try to avoid giving it invalid data.
 
 ### USAGE:
-
 ```c++
+#include "dynamic_bitset.h" // include
 #include <iostream>
-#include "dynamic_bitset.h"
 
 int main() {
-  dynamic_bitset bitset;
-  bitset.push_back(0); // bit at index 0 = false
-  bitset.push_back(1); // bit at index 1 = true
-  bitset.push_back(1); // bit at index 2 = true
+  dynamic_bitset::dynamic_bitset bitset; // define and construct bitset
 
-  bitset.unset(0); // bit at index 0 = false
-  bitset.unset(1); // bit at index 1 = false
+  bitset.push_i(0, 1); // push bit 1 to index 0
+  bitset.push_i(1, 0); // push bit 0 to index 1
+  bitset.push_i(2, 1); // push bit 1 to index 2
+  bitset.push_i(3, 0); // push bit 0 to index 3
 
-  bitset.set(1); // bit at index 1 = true
-  bitset.set(2); // bit at index 2 = true
+  bitset.pop_i(0); // pop bit at index 0
+  bitset.pop_i(1); // pop bit at index 1
 
-  bitset.toggle(0); // bit at index 0 = true
-  bitset.toggle(0); // bit at index 0 = false
+  bitset.set_i(0); // give bit at index 0 value 1
 
-  std::cout << bitset.size() << "\n"; // get the size, output: 3
-  bitset.pop(1) // remove element at index 1
-  std::cout << bitset.size() << "\n"; // get the size, output: 2
+  bitset.set(); // give all bits value 1
 
-  std::cout << bitset.get_string() << "\n"; // get the string representation, output: 01
+  bitset.unset_i(1); // give bit at index 1 value 0
 
-  bitset.destroy(); // deallocate memory, not calling this will cause memory leaks!
+  bitset.unset(); // give all bits value 0
 
+  bitset.toggle_i(0); // toggle the value of bit at index 0
+
+  bitset.toggle(); // toggle the value of all bits
+
+  bitset.swap(0, 1); // swap the values of bits at index 0 and 1
+
+  bitset.reverse(); // reverse the bits in bitset
+
+  bitset.extend(5, 0); // extend the bitset with 5 bits which all have a default value 0
+
+  bitset.set_string("1101001"); // set the contents of bitset to 1101001
+
+  std::cout << bitset.get_string(); // get contents of bitset
+
+  std::cout << bitset.get_bit(0); // get value of bit and index 0
+
+  std::cout << "\n";
+
+  bitset.destroy(); // destroy bitset (frees up some memory, not necessary as the deconstrucor also does this)
   return 0;
-}
-
+} // OUTPUT: 11010011
 ```
 
 ### STRUCTURE:
 
 ```c++
-class dynamic_bitset {
-private:
-  int m_size = 0; // amount of bits in bitset (private variable)
-  int* bytes = nullptr; // the actual data container (private variable)
-public:
-  bool operator[](int index); // the array index operator overload
-  int size(); // returns m_size
-  std::string get_string(); // returns the string representation of the bitset
-  void set(int index); // set bit at index
-  void unset(int index); // unset a bit at index
-  void toggle(int index); // toggle the value of the bit at index
-  void pop(int index); // remove bit at index from bitset
-  void push_back(bool bit); // pushes a new bit to the end of the bitset
-  void destroy(); // deallocates memory, not calling this will cause memory leaks!
+#pragma once
+#include <string>
+#include <exception>
+
+namespace dynamic_bitset {
+  class dynamic_bitset {
+  public:
+    bool initialized = false; // if bitset is initialized
+    unsigned int size = 0; // amount of bits in bitset
+    char* bytes = nullptr; // contains the bits
+
+    void push_i(unsigned int index, bool bit); // push (insert) bit to index
+    void pop_i(unsigned int index); // pop (remove) bit at index
+    void set_i(unsigned int index); // set bit at index
+    void set(); // set all bits
+    void unset_i(unsigned int index); // unset bit at index
+    void unset(); // unset all bits
+    void toggle_i(unsigned int index); // toggle bit at index
+    void toggle(); // toggle all bits
+    void swap(unsigned int index_1, unsigned int index_2); // swap bits at index_1 and index_2
+    void reverse(); // reverse the order of bits in bitset
+    void extend(unsigned int amount, bool default_bit); // add bits with default value
+
+    void set_string(std::string input); // set the contents bitset using string, example "1101001"
+    std::string get_string(); // get the contents of the bitset in string format
+    bool get_bit(unsigned int index); // get the value of bit at index
+
+    dynamic_bitset(); // constructor
+    ~dynamic_bitset(); // deconstructor
+    void destroy(); // deallocate the bit container and set bitset to uninitialized
+  }
 }
 ```
