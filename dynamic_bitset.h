@@ -322,7 +322,7 @@ namespace dynamic_bitset {
 
 
 		dynamic_bitset() {
-			if (not initialized) {
+			if (!initialized) {
 				initialized = true;
 				size = 0;
 				bytes = new char[0];
