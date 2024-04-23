@@ -75,11 +75,11 @@ namespace dynamic_bitset {
 
 				}
 				else {
-					throw std::exception("[ZEROES & ONES] ERROR: SPECIFIED INDEX OUT OF RANGE!");
+					throw std::exception("[dynamic_bitset] ERROR: SPECIFIED INDEX OUT OF RANGE!");
 				}
 			}
 			else {
-				throw std::exception("[ZEROES & ONES] ERROR: SPECIFIED BITSET HAS NOT BEEN INITIALIZED!");
+				throw std::exception("[dynamic_bitset] ERROR: SPECIFIED BITSET HAS NOT BEEN INITIALIZED!");
 			}
 		}
 		void pop_i(unsigned int index) {
@@ -106,11 +106,11 @@ namespace dynamic_bitset {
 					bytes = new_bytes;
 				}
 				else {
-					throw std::exception("[ZEROES & ONES] ERROR: SPECIFIED INDEX OUT OF RANGE!");
+					throw std::exception("[dynamic_bitset] ERROR: SPECIFIED INDEX OUT OF RANGE!");
 				}
 			}
 			else {
-				throw std::exception("[ZEROES & ONES] ERROR: SPECIFIED BITSET HAS NOT BEEN INITIALIZED!");
+				throw std::exception("[dynamic_bitset] ERROR: SPECIFIED BITSET HAS NOT BEEN INITIALIZED!");
 			}
 		}
 		void set_i(unsigned int index) {
@@ -119,11 +119,11 @@ namespace dynamic_bitset {
 					bytes[index / 8] |= 1 << (index % 8);
 				}
 				else {
-					throw std::exception("[ZEROES & ONES] ERROR: SPECIFIED INDEX OUT OF RANGE!");
+					throw std::exception("[dynamic_bitset] ERROR: SPECIFIED INDEX OUT OF RANGE!");
 				}
 			}
 			else {
-				throw std::exception("[ZEROES & ONES] ERROR: SPECIFIED BITSET HAS NOT BEEN INITIALIZED!");
+				throw std::exception("[dynamic_bitset] ERROR: SPECIFIED BITSET HAS NOT BEEN INITIALIZED!");
 			}
 		}
 		void set() {
@@ -133,7 +133,7 @@ namespace dynamic_bitset {
 				}
 			}
 			else {
-				throw std::exception("[ZEROES & ONES] ERROR: SPECIFIED BITSET HAS NOT BEEN INITIALIZED!");
+				throw std::exception("[dynamic_bitset] ERROR: SPECIFIED BITSET HAS NOT BEEN INITIALIZED!");
 			}
 		}
 		void unset_i(unsigned int index) {
@@ -142,11 +142,11 @@ namespace dynamic_bitset {
 					bytes[index / 8] &= ~(1 << (index % 8));
 				}
 				else {
-					throw std::exception("[ZEROES & ONES] ERROR: SPECIFIED INDEX OUT OF RANGE!");
+					throw std::exception("[dynamic_bitset] ERROR: SPECIFIED INDEX OUT OF RANGE!");
 				}
 			}
 			else {
-				throw std::exception("[ZEROES & ONES] ERROR: SPECIFIED BITSET HAS NOT BEEN INITIALIZED!");
+				throw std::exception("[dynamic_bitset] ERROR: SPECIFIED BITSET HAS NOT BEEN INITIALIZED!");
 			}
 		}
 		void unset() {
@@ -156,7 +156,7 @@ namespace dynamic_bitset {
 				}
 			}
 			else {
-				throw std::exception("[ZEROES & ONES] ERROR: SPECIFIED BITSET HAS NOT BEEN INITIALIZED!");
+				throw std::exception("[dynamic_bitset] ERROR: SPECIFIED BITSET HAS NOT BEEN INITIALIZED!");
 			}
 		}
 		void toggle_i(unsigned int index) {
@@ -165,11 +165,11 @@ namespace dynamic_bitset {
 					bytes[index / 8] ^= 1 << (index % 8);
 				}
 				else {
-					throw std::exception("[ZEROES & ONES] ERROR: SPECIFIED INDEX OUT OF RANGE!");
+					throw std::exception("[dynamic_bitset] ERROR: SPECIFIED INDEX OUT OF RANGE!");
 				}
 			}
 			else {
-				throw std::exception("[ZEROES & ONES] ERROR: SPECIFIED BITSET HAS NOT BEEN INITIALIZED!");
+				throw std::exception("[dynamic_bitset] ERROR: SPECIFIED BITSET HAS NOT BEEN INITIALIZED!");
 			}
 		}
 		void toggle() {
@@ -179,7 +179,7 @@ namespace dynamic_bitset {
 				}
 			}
 			else {
-				throw std::exception("[ZEROES & ONES] ERROR: SPECIFIED BITSET HAS NOT BEEN INITIALIZED!");
+				throw std::exception("[dynamic_bitset] ERROR: SPECIFIED BITSET HAS NOT BEEN INITIALIZED!");
 			}
 		}
 		void swap(unsigned int index_1, unsigned int index_2) {
@@ -206,15 +206,15 @@ namespace dynamic_bitset {
 						}
 					}
 					else {
-						throw std::exception("[ZEROES & ONES] ERROR: SPECIFIED INDEX OUT OF RANGE!");
+						throw std::exception("[dynamic_bitset] ERROR: SPECIFIED INDEX OUT OF RANGE!");
 					}
 				}
 				else {
-					throw std::exception("[ZEROES & ONES] ERROR: SPECIFIED INDEX OUT OF RANGE!");
+					throw std::exception("[dynamic_bitset] ERROR: SPECIFIED INDEX OUT OF RANGE!");
 				}
 			}
 			else {
-				throw std::exception("[ZEROES & ONES] ERROR: SPECIFIED BITSET HAS NOT BEEN INITIALIZED!");
+				throw std::exception("[dynamic_bitset] ERROR: SPECIFIED BITSET HAS NOT BEEN INITIALIZED!");
 			}
 		}
 		void reverse() {
@@ -232,7 +232,7 @@ namespace dynamic_bitset {
 				bytes = new_bytes;
 			}
 			else {
-				throw std::exception("[ZEROES & ONES] ERROR: SPECIFIED BITSET HAS NOT BEEN INITIALIZED!");
+				throw std::exception("[dynamic_bitset] ERROR: SPECIFIED BITSET HAS NOT BEEN INITIALIZED!");
 			}
 		}
 		void extend(unsigned int amount, bool default_bit) {
@@ -263,7 +263,7 @@ namespace dynamic_bitset {
 				bytes = new_bytes;
 			}
 			else {
-				throw std::exception("[ZEROES & ONES] ERROR: SPECIFIED BITSET HAS NOT BEEN INITIALIZED!");
+				throw std::exception("[dynamic_bitset] ERROR: SPECIFIED BITSET HAS NOT BEEN INITIALIZED!");
 			}
 		}
 
@@ -278,7 +278,7 @@ namespace dynamic_bitset {
 						new_bytes[i / 8] &= ~(1 << (i % 8));
 					}
 					else {
-						throw std::exception("[ZEROES & ONES] ERROR: INVALID CHARACTER IN INPUT STRING!");
+						throw std::exception("[dynamic_bitset] ERROR: INVALID CHARACTER IN INPUT STRING!");
 					}
 				}
 				size = input.length();
@@ -287,7 +287,7 @@ namespace dynamic_bitset {
 				bytes = new_bytes;
 			}
 			else {
-				throw std::exception("[ZEROES & ONES] ERROR: SPECIFIED BITSET HAS NOT BEEN INITIALIZED!");
+				throw std::exception("[dynamic_bitset] ERROR: SPECIFIED BITSET HAS NOT BEEN INITIALIZED!");
 			}
 		}
 		std::string get_string() {
@@ -304,7 +304,7 @@ namespace dynamic_bitset {
 				return output;
 			}
 			else {
-				throw std::exception("[ZEROES & ONES] ERROR: SPECIFIED BITSET HAS NOT BEEN INITIALIZED!");
+				throw std::exception("[dynamic_bitset] ERROR: SPECIFIED BITSET HAS NOT BEEN INITIALIZED!");
 			}
 			return "";
 		}
@@ -315,7 +315,7 @@ namespace dynamic_bitset {
 				}
 			}
 			else {
-				throw std::exception("[ZEROES & ONES] ERROR: SPECIFIED INDEX OUT OF RANGE!");
+				throw std::exception("[dynamic_bitset] ERROR: SPECIFIED INDEX OUT OF RANGE!");
 			}
 			return 0;
 		}
